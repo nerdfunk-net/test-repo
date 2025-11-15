@@ -1,0 +1,14 @@
+{
+  "name": "test",
+  "description": "test",
+  "conditions": [
+    {
+      "field": "location",
+      "operator": "equals",
+      "value": "lab",
+      "logic": "AND"
+    }
+  ],
+  "created_at": "2025-11-15T14:54:34.977526",
+  "updated_at": "2025-11-15T14:54:34.977530"
+}
