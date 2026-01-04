@@ -1,0 +1,111 @@
+Using 1644 out of 131072 bytes
+!
+! Last configuration change at 17:32:19 UTC Sat Jan 3 2026 by noc
+!
+version 17.15
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname switch
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip audit notify log
+ip audit po max-events 100
+ip domain name lab.zz
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-131184643
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-131184643
+ revocation-check none
+ rsakeypair TP-self-signed-131184643
+ hash sha512
+!
+!
+crypto pki certificate chain TP-self-signed-131184643
+ certificate self-signed 01 nvram:IOS-Self-Sig#1.cer
+!
+!
+memory free low-watermark processor 79593
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+username noc privilege 15 secret 9 $9$nGRyowBYics/GU$eCnPPBSSBZyAUaWNZ0fduIsBiINAw8ePAYj5e8Sh/LM
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport access vlan 100
+!
+interface Ethernet0/1
+ switchport access vlan 100
+!
+interface Ethernet0/2
+ switchport access vlan 100
+!
+interface Ethernet0/3
+!
+interface Vlan100
+ ip address 192.168.178.242 255.255.255.0
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+!
+no logging btrace
+snmp-server group nocgroup v3 auth 
+snmp-server view all-view iso included
+snmp-server community 7 02150A561B05002C415B0710110E  RO
+snmp-server location Home-Lab-Rack-01
+snmp-server contact admin@homelab.local
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
